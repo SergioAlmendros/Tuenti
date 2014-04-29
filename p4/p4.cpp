@@ -4,6 +4,8 @@
 
 using namespace std;
 
+int pos;
+
 void printVector(vector<string> &v){
   
   for(int i=0; i<int(v.size()); ++i){
@@ -20,7 +22,7 @@ struct adn{
 };
 
 vector<string> vtotal;
-vector<string> vfinal;
+vector<vector<string> > vfinal;
 
 void printVectorADN(vector<adn> &v){
   for(int i=0; i<int(v.size()); ++i){
@@ -72,12 +74,19 @@ void findADN(adn *actual, string target){
   }
 }
 
-void printHijos(adn *a){
 
-  vfinal.push_back(a->name);
+void printHijos(adn *a, string target, string start){
+
+  vfinal[pos].push_back(a->name);
+  if(a->name == target){
+    pos++;
+    vector<string> v;
+    vfinal.push_back(v);
+    vfinal[pos].push_back(start);
+  }
   
   for(int i=0; i<int(a->vha.size()); i++){
-    printHijos(a->vha[i]);
+    printHijos(a->vha[i],target,start);
   }
 
 }
@@ -87,6 +96,9 @@ int main(){
   string s,t,a;
   cin>>s;
   cin>>t;
+  pos = 0;
+  vector<string> v;
+  vfinal.push_back(v);
   
   vtotal.push_back(t);
   while(cin>>a){
@@ -106,15 +118,18 @@ int main(){
   
   //printVectorADN(i->vha);
   
-  printHijos(i);
-  //cout<< i->vha[0]->vha.size() <<endl;
+  printHijos(i,t,s);
+  cout<< int(vfinal.size()) <<endl;
   
   for(int i=0; i<int(vfinal.size()); i++){
-    cout<<vfinal[i];
-    if(i == int(vfinal.size())-1)
-      cout<<endl;
-    else
-      cout<<"->";
+    for(int j=0; j<int(vfinal[i].size()); j++){
+      cout<<vfinal[i][j];
+      if(j == int(vfinal[i].size())-1)
+        cout<<endl;
+      else
+        cout<<"->";
+    }
+    
   }
   
   return 0;
