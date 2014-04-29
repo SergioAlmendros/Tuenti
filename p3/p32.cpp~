@@ -1,0 +1,19 @@
+#include <iostream>
+#include <fstream>
+
+using namespace std;
+
+int main(){
+  
+  ofstream myfile;
+  myfile.open ("p3/p3.in");
+  
+  for(int i=0; i<31; i++)
+    for(int j=0; j<31; j++){
+      myfile << i; //<< " " << j << "\n";
+    }
+  //myfile << "Writing this to a file.\n";
+  myfile.close();
+  
+  return 0;
+}
