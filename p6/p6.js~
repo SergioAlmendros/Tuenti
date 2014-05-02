@@ -1,0 +1,29 @@
+#!/usr/sbin node
+
+console.log("hello");
+
+
+if ((process.version.split('.')[1]|0) < 10) {
+	console.log('Please, upgrade your node version to 0.10+');
+	process.exit();
+}
+
+var net = require('net');
+var util = require('util');
+var crypto = require('crypto');
+var fs = require('fs');
+
+net.createServer(function(socket) {
+
+	var dh, secret, state = 0;
+
+	socket.on('data', function(data) {
+
+		data = data.toString().trim().split('|');
+    console.log(data);
+		
+	});
+
+}).listen(6969, '54.83.207.90', function() {
+	console.log('listening...');
+});
